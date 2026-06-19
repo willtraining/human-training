@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Human Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- ═══════════════════════════════════════════
+       HEADER — siempre visible
+  ═══════════════════════════════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <span class="header-label">HUMAN</span>
+      <span class="header-title">TRAINING</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       PANTALLA: RESUMEN (home)
+  ═══════════════════════════════════════════ -->
+  <section class="screen active" id="screen-home">
+
+    <div class="overview-card">
+
+      <div class="overview-week-nav">
+        <button class="week-nav-btn" id="week-prev" aria-label="Semana anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <span class="week-nav-label" id="week-label">— —</span>
+        <button class="week-nav-btn" id="week-next" aria-label="Semana siguiente">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div class="overview-body">
+
+        <div class="overview-ring-block">
+          <div class="overview-ring" id="overview-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120" id="ring-svg">
+              <circle class="ring-track" cx="60" cy="60" r="50"/>
+              <g id="ring-arcs"></g>
+            </svg>
+            <div class="ring-center">
+              <span class="ring-num" id="ring-count">0</span>
+              <span class="ring-week">SESIONES</span>
+            </div>
+          </div>
+          <div class="overview-volume">
+            <span class="overview-volume-value" id="overview-volume-value">0 km</span>
+            <span class="overview-volume-label">VOLUMEN TOTAL</span>
+          </div>
+        </div>
+
+        <div class="overview-stat-list" id="overview-stat-list">
+          <!-- generado por JS -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="session-feed">
+      <div class="feed-header">
+        <span class="feed-label">SESIONES RECIENTES</span>
+        <button class="feed-ver-todo" id="btn-ver-todo">Ver todas</button>
+      </div>
+      <div id="session-preview">
+        <!-- generado por JS -->
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PANTALLA: HISTORIAL
+  ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-history">
+    <div class="screen-header">
+      <span class="screen-title">HISTORIAL</span>
+    </div>
+    <div id="session-list">
+      <!-- generado por JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PANTALLA: SELECCIONAR DEPORTE
+  ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-select-sport">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-home')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <span class="screen-title">NUEVA ACTIVIDAD</span>
+    </div>
+
+    <p class="screen-subtitle">Seleccioná el deporte</p>
+
+    <div class="sport-list">
+
+      <button class="sport-row-btn" onclick="openSportForm('running')">
+        <span class="sport-row-icon">
+          <img src="assets/icons/running.svg" alt="Running">
+        </span>
+        <span class="sport-row-name">RUNNING</span>
+        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="sport-row-btn" onclick="openSportForm('cycling')">
+        <span class="sport-row-icon">
+          <img src="assets/icons/cycling.svg" alt="Cycling">
+        </span>
+        <span class="sport-row-name">CYCLING</span>
+        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="sport-row-btn" onclick="openSportForm('swimming')">
+        <span class="sport-row-icon">
+          <img src="assets/icons/swimming.svg" alt="Swimming">
+        </span>
+        <span class="sport-row-name">SWIMMING</span>
+        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="sport-row-btn" onclick="openSportForm('gym')">
+        <span class="sport-row-icon">
+          <img src="assets/icons/gym.svg" alt="Gym">
+        </span>
+        <span class="sport-row-name">GYM</span>
+        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="sport-row-btn" onclick="openSportForm('walking')">
+        <span class="sport-row-icon">
+          <img src="assets/icons/walking.svg" alt="Walking">
+        </span>
+        <span class="sport-row-name">WALKING</span>
+        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PANTALLA: FORMULARIO DE ACTIVIDAD
+  ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-form">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-select-sport')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="form-header-sport">
+        <img id="form-sport-icon" src="" alt="" class="form-sport-img">
+        <span class="screen-title" id="form-sport-title">ACTIVIDAD</span>
+      </div>
+    </div>
+
+    <div class="form-body" id="form-body">
+      <!-- generado por JS según deporte -->
+    </div>
+
+    <div class="form-footer">
+      <button class="btn-save" id="btn-save" onclick="saveSession()">
+        GUARDAR SESIÓN
+      </button>
+    </div>
+  </section>
+
+</div><!-- /app -->
+
+<!-- ═══════════════════════════════════════════
+     FAB
+═══════════════════════════════════════════ -->
+<button class="fab" id="fab" onclick="showScreen('screen-select-sport')" aria-label="Nueva actividad">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <line x1="12" y1="5" x2="12" y2="19"></line>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+  </svg>
+</button>
+
+<!-- ═══════════════════════════════════════════
+     BOTTOM NAV
+═══════════════════════════════════════════ -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="nav-btn active" id="nav-home" onclick="navTo('home')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"></path>
+      <polyline points="9 21 9 12 15 12 15 21"></polyline>
+    </svg>
+    <span>Resumen</span>
+  </button>
+  <button class="nav-btn" id="nav-history" onclick="navTo('history')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="16" y1="2" x2="16" y2="6"></line>
+      <line x1="8" y1="2" x2="8" y2="6"></line>
+      <line x1="3" y1="10" x2="21" y2="10"></line>
+    </svg>
+    <span>Historial</span>
+  </button>
+</nav>
+
+<script src="js/app.js"></script>
+</body>
+</html>
