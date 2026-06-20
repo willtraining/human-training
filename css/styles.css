@@ -1105,3 +1105,400 @@ textarea.form-input {
 .fab.hidden {
   display: none;
 }
+
+/* ═══════════════════════════════════════════
+   ONBOARDING — paso a paso
+═══════════════════════════════════════════ */
+#screen-onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+#screen-onboarding.active {
+  display: flex;
+}
+
+.ob-progress {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 24px 20px 0;
+  flex-shrink: 0;
+}
+
+.ob-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--surface3);
+  transition: background 0.3s, width 0.3s;
+}
+
+.ob-dot.active {
+  background: var(--accent);
+  width: 20px;
+  border-radius: 3px;
+}
+
+.ob-slides {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 24px;
+}
+
+.ob-slide {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  animation: obFadeIn 0.28s ease;
+}
+
+.ob-slide-hidden { display: none; }
+
+.ob-slide-enter {
+  animation: obSlideIn 0.28s ease;
+}
+
+@keyframes obFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes obSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.ob-brand {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.ob-brand-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.ob-brand-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text);
+  line-height: 1;
+}
+
+.ob-step-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.ob-headline {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+
+.ob-sub {
+  font-size: 14px;
+  color: var(--text-sec);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.ob-field-block {
+  margin-bottom: 14px;
+}
+
+.ob-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ob-input {
+  font-size: 16px;
+}
+
+/* Ready checkmark */
+.ob-ready-mark {
+  margin-bottom: 28px;
+}
+
+/* Role selector — sin emojis */
+.role-icon-shape {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 2px solid currentColor;
+  flex-shrink: 0;
+}
+
+.role-icon-athlete {
+  border-color: var(--accent);
+  position: relative;
+}
+
+.role-icon-athlete::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.role-icon-coach {
+  border-color: var(--text-sec);
+  position: relative;
+}
+
+.role-icon-coach::before {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 2px;
+  background: var(--text-sec);
+  box-shadow: 0 5px 0 var(--text-sec), 0 10px 0 var(--text-sec);
+}
+
+/* Role selector */
+.role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.role-btn {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.role-btn.selected {
+  border-color: var(--accent);
+  background: rgba(139,226,52,0.07);
+}
+
+.role-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.role-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Sport grid */
+.onboard-category-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 14px 0 8px;
+}
+
+.onboard-sport-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 4px;
+}
+
+.onboard-sport-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.onboard-sport-btn.selected {
+  border-color: var(--sp-color, var(--accent));
+  background: color-mix(in srgb, var(--sp-color, var(--accent)) 12%, transparent);
+}
+
+.onboard-sport-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.onboard-sport-btn.selected .onboard-sport-name {
+  color: var(--sp-color, var(--accent));
+}
+
+/* Footer */
+.ob-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px 40px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.ob-next-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: #0B0F17;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.ob-next-btn:active { opacity: 0.85; }
+
+.ob-back-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* Header greeting */
+.header-greeting {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+/* Sport list categories in select screen */
+.sport-list-category {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 16px 6px;
+}
+
+/* Empty stat */
+.stat-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 16px 0;
+}
+
+/* Session notes */
+.session-notes {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  margin-bottom: 10px;
+}
+
+.session-notes-text {
+  font-size: 13px;
+  color: var(--text-sec);
+  line-height: 1.5;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+/* ═══════════════════════════════════════════
+   SESSION CARD ACTIONS (edit + delete)
+═══════════════════════════════════════════ */
+.session-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-edit-session {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text-sec);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-edit-session:active {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.btn-delete-session {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #EF4444;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+/* Edit badge en el header del formulario */
+.edit-badge {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #F59E0B;
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 20px;
+  padding: 3px 8px;
+  margin-left: 8px;
+}

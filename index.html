@@ -13,38 +13,137 @@
 
 <div class="app" id="app">
 
-  <!-- ═══════════════════════════════════════════
-       HEADER — siempre visible
-  ═══════════════════════════════════════════ -->
+  <!-- ═══ ONBOARDING ═══════════════════════ -->
+  <section class="screen" id="screen-onboarding">
+
+    <!-- Progress dots -->
+    <div class="ob-progress" id="ob-progress">
+      <span class="ob-dot active" data-step="0"></span>
+      <span class="ob-dot" data-step="1"></span>
+      <span class="ob-dot" data-step="2"></span>
+      <span class="ob-dot" data-step="3"></span>
+      <span class="ob-dot" data-step="4"></span>
+    </div>
+
+    <!-- Slides wrapper -->
+    <div class="ob-slides" id="ob-slides">
+
+      <!-- PASO 0 — Bienvenida -->
+      <div class="ob-slide" id="ob-slide-0">
+        <div class="ob-brand">
+          <span class="ob-brand-label">HUMAN</span>
+          <span class="ob-brand-title">TRAINING</span>
+        </div>
+        <div class="ob-headline">Tu herramienta de entrenamiento</div>
+        <div class="ob-sub">Registrá cada sesión, seguí tu progreso y gestioná tus atletas. Empecemos cargando tus datos.</div>
+        <div class="ob-field-block">
+          <label class="form-label">Tu nombre</label>
+          <input type="text" class="form-input ob-input" id="onboard-name" placeholder="Nombre">
+        </div>
+      </div>
+
+      <!-- PASO 1 — Datos físicos -->
+      <div class="ob-slide ob-slide-hidden" id="ob-slide-1">
+        <div class="ob-step-label">PASO 2 DE 5</div>
+        <div class="ob-headline">Tus datos físicos</div>
+        <div class="ob-sub">Estos datos nos ayudan a personalizar tus métricas.</div>
+        <div class="ob-field-block">
+          <label class="form-label">Edad</label>
+          <input type="number" class="form-input ob-input" id="onboard-age" placeholder="25" min="10" max="99">
+        </div>
+        <div class="ob-row">
+          <div class="ob-field-block">
+            <label class="form-label">Peso (kg)</label>
+            <input type="number" step="0.5" class="form-input ob-input" id="onboard-weight" placeholder="75">
+          </div>
+          <div class="ob-field-block">
+            <label class="form-label">Altura (cm)</label>
+            <input type="number" class="form-input ob-input" id="onboard-height" placeholder="175">
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2 — Rol -->
+      <div class="ob-slide ob-slide-hidden" id="ob-slide-2">
+        <div class="ob-step-label">PASO 3 DE 5</div>
+        <div class="ob-headline">¿Cuál es tu rol?</div>
+        <div class="ob-sub">Podés ser las dos cosas a la vez.</div>
+        <div class="role-selector">
+          <button type="button" class="role-btn selected" data-role="athlete" onclick="selectRole(this,'athlete')">
+            <div class="role-icon-shape role-icon-athlete"></div>
+            <span class="role-label">ATLETA</span>
+            <span class="role-desc">Registro mis entrenamientos</span>
+          </button>
+          <button type="button" class="role-btn" data-role="coach" onclick="selectRole(this,'coach')">
+            <div class="role-icon-shape role-icon-coach"></div>
+            <span class="role-label">ENTRENADOR</span>
+            <span class="role-desc">También gestiono alumnos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PASO 3 — Deportes -->
+      <div class="ob-slide ob-slide-hidden" id="ob-slide-3">
+        <div class="ob-step-label">PASO 4 DE 5</div>
+        <div class="ob-headline">¿Qué deportes practicás?</div>
+        <div class="ob-sub">Solo te vamos a mostrar lo que es relevante para vos.</div>
+        <div id="onboarding-sport-grid"></div>
+      </div>
+
+      <!-- PASO 4 — Listo -->
+      <div class="ob-slide ob-slide-hidden" id="ob-slide-4">
+        <div class="ob-step-label">PASO 5 DE 5</div>
+        <div class="ob-ready-mark">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="27" stroke="#8BE234" stroke-width="2"/>
+            <polyline points="17 28 24 35 39 20" stroke="#8BE234" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ob-headline" id="ob-ready-headline">Todo listo</div>
+        <div class="ob-sub" id="ob-ready-sub">Ya podés empezar a registrar tus entrenamientos.</div>
+      </div>
+
+    </div>
+
+    <!-- Footer con botón -->
+    <div class="ob-footer">
+      <button class="btn-back ob-back-btn" id="ob-back" onclick="obPrev()" style="visibility:hidden">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button type="button" class="btn-save ob-next-btn" id="ob-next" onclick="obNext()">
+        CONTINUAR
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ═══ HEADER ════════════════════════════ -->
   <header class="app-header">
     <div class="header-brand">
       <span class="header-label">HUMAN</span>
       <span class="header-title">TRAINING</span>
     </div>
+    <span class="header-greeting" id="app-greeting"></span>
   </header>
 
-  <!-- ═══════════════════════════════════════════
-       PANTALLA: RESUMEN (home)
-  ═══════════════════════════════════════════ -->
+  <!-- ═══ HOME ══════════════════════════════ -->
   <section class="screen active" id="screen-home">
 
     <div class="overview-card">
-
       <div class="overview-week-nav">
-        <button class="week-nav-btn" id="week-prev" aria-label="Semana anterior">
+        <button class="week-nav-btn" id="week-prev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
         <span class="week-nav-label" id="week-label">— —</span>
-        <button class="week-nav-btn" id="week-next" aria-label="Semana siguiente">
+        <button class="week-nav-btn" id="week-next">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
       </div>
 
       <div class="overview-body">
-
         <div class="overview-ring-block">
-          <div class="overview-ring" id="overview-ring">
-            <svg class="ring-svg" viewBox="0 0 120 120" id="ring-svg">
+          <div class="overview-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120">
               <circle class="ring-track" cx="60" cy="60" r="50"/>
               <g id="ring-arcs"></g>
             </svg>
@@ -54,15 +153,11 @@
             </div>
           </div>
           <div class="overview-volume">
-            <span class="overview-volume-value" id="overview-volume-value">0 km</span>
-            <span class="overview-volume-label">VOLUMEN TOTAL</span>
+            <span class="overview-volume-value" id="overview-volume-value">—</span>
+            <span class="overview-volume-label">VOLUMEN</span>
           </div>
         </div>
-
-        <div class="overview-stat-list" id="overview-stat-list">
-          <!-- generado por JS -->
-        </div>
-
+        <div class="overview-stat-list" id="overview-stat-list"></div>
       </div>
     </div>
 
@@ -71,137 +166,59 @@
         <span class="feed-label">SESIONES RECIENTES</span>
         <button class="feed-ver-todo" id="btn-ver-todo">Ver todas</button>
       </div>
-      <div id="session-preview">
-        <!-- generado por JS -->
-      </div>
+      <div id="session-preview"></div>
     </div>
 
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       PANTALLA: HISTORIAL
-  ═══════════════════════════════════════════ -->
+  <!-- ═══ HISTORIAL ═════════════════════════ -->
   <section class="screen" id="screen-history">
     <div class="screen-header">
       <span class="screen-title">HISTORIAL</span>
     </div>
-    <div id="session-list">
-      <!-- generado por JS -->
-    </div>
+    <div id="session-list"></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       PANTALLA: SELECCIONAR DEPORTE
-  ═══════════════════════════════════════════ -->
+  <!-- ═══ SELECCIONAR DEPORTE ═══════════════ -->
   <section class="screen" id="screen-select-sport">
     <div class="screen-header">
-      <button class="btn-back" onclick="showScreen('screen-home')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
+      <button class="btn-back" onclick="navTo('home')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
       <span class="screen-title">NUEVA ACTIVIDAD</span>
     </div>
-
-    <p class="screen-subtitle">Seleccioná el deporte</p>
-
-    <div class="sport-list">
-
-      <button class="sport-row-btn" onclick="openSportForm('running')">
-        <span class="sport-row-icon">
-          <img src="assets/icons/running.svg" alt="Running">
-        </span>
-        <span class="sport-row-name">RUNNING</span>
-        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-      <button class="sport-row-btn" onclick="openSportForm('cycling')">
-        <span class="sport-row-icon">
-          <img src="assets/icons/cycling.svg" alt="Cycling">
-        </span>
-        <span class="sport-row-name">CYCLING</span>
-        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-      <button class="sport-row-btn" onclick="openSportForm('swimming')">
-        <span class="sport-row-icon">
-          <img src="assets/icons/swimming.svg" alt="Swimming">
-        </span>
-        <span class="sport-row-name">SWIMMING</span>
-        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-      <button class="sport-row-btn" onclick="openSportForm('gym')">
-        <span class="sport-row-icon">
-          <img src="assets/icons/gym.svg" alt="Gym">
-        </span>
-        <span class="sport-row-name">GYM</span>
-        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-      <button class="sport-row-btn" onclick="openSportForm('walking')">
-        <span class="sport-row-icon">
-          <img src="assets/icons/walking.svg" alt="Walking">
-        </span>
-        <span class="sport-row-name">WALKING</span>
-        <svg class="sport-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-    </div>
+    <p class="screen-subtitle">¿Qué entrenaste?</p>
+    <div class="sport-list" id="sport-list"></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       PANTALLA: FORMULARIO DE ACTIVIDAD
-  ═══════════════════════════════════════════ -->
+  <!-- ═══ FORMULARIO ════════════════════════ -->
   <section class="screen" id="screen-form">
     <div class="screen-header">
-      <button class="btn-back" onclick="showScreen('screen-select-sport')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
+      <button class="btn-back" onclick="renderSportSelectScreen(); showScreen('screen-select-sport')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
       <div class="form-header-sport">
         <img id="form-sport-icon" src="" alt="" class="form-sport-img">
         <span class="screen-title" id="form-sport-title">ACTIVIDAD</span>
       </div>
     </div>
-
-    <div class="form-body" id="form-body">
-      <!-- generado por JS según deporte -->
-    </div>
-
+    <div class="form-body" id="form-body"></div>
     <div class="form-footer">
-      <button class="btn-save" id="btn-save" onclick="saveSession()">
-        GUARDAR SESIÓN
-      </button>
+      <button class="btn-save" onclick="saveSession()">GUARDAR SESIÓN</button>
     </div>
   </section>
 
-</div><!-- /app -->
+</div>
 
-<!-- ═══════════════════════════════════════════
-     FAB
-═══════════════════════════════════════════ -->
-<button class="fab" id="fab" onclick="showScreen('screen-select-sport')" aria-label="Nueva actividad">
+<!-- FAB -->
+<button class="fab" id="fab" aria-label="Nueva actividad">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
     <line x1="12" y1="5" x2="12" y2="19"></line>
     <line x1="5" y1="12" x2="19" y2="12"></line>
   </svg>
 </button>
 
-<!-- ═══════════════════════════════════════════
-     BOTTOM NAV
-═══════════════════════════════════════════ -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav" id="bottom-nav">
   <button class="nav-btn active" id="nav-home" onclick="navTo('home')">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
